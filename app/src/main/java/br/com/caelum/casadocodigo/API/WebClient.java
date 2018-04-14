@@ -19,29 +19,26 @@ public class WebClient {
     private static final String SERVER_URL = "http://cdcmob.herokuapp.com";
     public LivrosDelegate delegate;
 
-    public WebClient(LivrosDelegate delegate){
-        this.delegate = delegate;
+    public WebClient(){
     }
 
-    public void getLivros() {
+    public void getLivros(int indicePrimeiro, int qtd) {
         Retrofit client = new Retrofit.Builder().
                 baseUrl(SERVER_URL).
                 addConverterFactory(GsonConverterFactory.create()).build();
 
         LivrosService service = client.create(LivrosService.class);
-        Call<Livros> call = service.listaLivro();
+        Call<Livros> call = service.listaLivro(indicePrimeiro,qtd);
         call.enqueue(new Callback<Livros>(){
 
             @Override
             public void onResponse(Call<Livros> call, Response<Livros> response) {
                 EventBus.getDefault().post(new LivroEvent(response.body()));
-//                delegate.lidaComSucesso(response.body());
             }
 
             @Override
             public void onFailure(Call<Livros> call, Throwable t) {
                 EventBus.getDefault().post(new Throwable(t));
-//                delegate.lidaComErro(t);
             }
 
 

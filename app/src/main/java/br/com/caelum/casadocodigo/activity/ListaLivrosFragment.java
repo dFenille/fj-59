@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.caelum.casadocodigo.API.WebClient;
 import br.com.caelum.casadocodigo.R;
 import br.com.caelum.casadocodigo.adapter.LivroAdapter;
 import br.com.caelum.casadocodigo.modelo.Livro;
@@ -25,15 +26,13 @@ import butterknife.ButterKnife;
 public class ListaLivrosFragment extends Fragment {
     public List<Livro> livros = new ArrayList<>();
 
-//    @BindView(R.id.lista_livros)
-//     RecyclerView recyclerView;
-
     @BindView(R.id.lista_livros_teste)
     RecyclerView recyclerView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
+
         View view = inflater.inflate(R.layout.fragment_lista_livros,container,false);
 //        ButterKnife.bind(this,view);
         recyclerView = (RecyclerView) view.findViewById(R.id.lista_livros_teste);
@@ -48,9 +47,19 @@ public class ListaLivrosFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
-    public void populaListaCom(Livros livros) {
-        this.livros.clear();
+
+
+
+    public void populaListaCom(final Livros livros) {
+
+//        this.livros.clear();
         this.livros.addAll(livros.getLivros());
         recyclerView.getAdapter().notifyDataSetChanged();
+        recyclerView.setOnScrollListener(new EndlessList() {
+            @Override
+            void carregaItens() {
+                new WebClient().getLivros(livros.getLivros().size(),20);
+            }
+        });
     }
 }
