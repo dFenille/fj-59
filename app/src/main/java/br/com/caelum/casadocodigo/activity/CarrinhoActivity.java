@@ -6,6 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
+import br.com.caelum.casadocodigo.CasaDoCodigoApplication;
 import br.com.caelum.casadocodigo.R;
 import br.com.caelum.casadocodigo.adapter.ItensAdapter;
 import br.com.caelum.casadocodigo.modelo.Carrinho;
@@ -20,7 +23,9 @@ public class CarrinhoActivity extends AppCompatActivity {
     @BindView(R.id.valor_carrinho)
     TextView valorTotal;
 
-    private Carrinho carrinho = new Carrinho();
+    @Inject
+    Carrinho carrinho;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +34,9 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         listaItens = (RecyclerView) findViewById(R.id.lista_itens_carrinho);
         valorTotal = (TextView) findViewById(R.id.valor_carrinho);
+
+        CasaDoCodigoApplication app = (CasaDoCodigoApplication) getApplication();
+        app.getComponent().inject(this);
     }
 
     @Override
