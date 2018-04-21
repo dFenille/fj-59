@@ -12,13 +12,12 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.caelum.casadocodigo.API.WebClient;
+import br.com.caelum.casadocodigo.api.WebClient;
 import br.com.caelum.casadocodigo.R;
 import br.com.caelum.casadocodigo.adapter.LivroAdapter;
 import br.com.caelum.casadocodigo.modelo.Livro;
 import br.com.caelum.casadocodigo.modelo.Livros;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by android7392 on 14/04/18.
@@ -48,18 +47,23 @@ public class ListaLivrosFragment extends Fragment {
     }
 
 
-
-
-    public void populaListaCom(final Livros livros) {
+    public void populaListaCom(final Livros livros_populate) {
 
 //        this.livros.clear();
-        this.livros.addAll(livros.getLivros());
+        this.livros.addAll(livros_populate.getLivros());
         recyclerView.getAdapter().notifyDataSetChanged();
         recyclerView.setOnScrollListener(new EndlessList() {
             @Override
             void carregaItens() {
-                new WebClient().getLivros(livros.getLivros().size(),20);
+                new WebClient().getLivros(ListaLivrosFragment.this.livros.size(),20);
             }
         });
     }
+
+
+
+
+
+
+
 }

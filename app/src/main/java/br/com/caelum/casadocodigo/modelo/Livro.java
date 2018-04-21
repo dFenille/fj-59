@@ -2,9 +2,10 @@ package br.com.caelum.casadocodigo.modelo;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class    Livro {
+public class    Livro implements Serializable {
 
     private long id;
     @SerializedName("nomeLivro")

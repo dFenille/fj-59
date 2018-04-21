@@ -1,4 +1,4 @@
-package br.com.caelum.casadocodigo.API;
+package br.com.caelum.casadocodigo.api;
 
 import org.greenrobot.eventbus.EventBus;
 

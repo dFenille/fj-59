@@ -1,6 +1,4 @@
-package br.com.caelum.casadocodigo.API;
-
-import java.util.List;
+package br.com.caelum.casadocodigo.api;
 
 import br.com.caelum.casadocodigo.modelo.Livros;
 import retrofit2.Call;
