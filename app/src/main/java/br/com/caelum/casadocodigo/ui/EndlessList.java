@@ -1,4 +1,4 @@
-package br.com.caelum.casadocodigo.activity;
+package br.com.caelum.casadocodigo.ui;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

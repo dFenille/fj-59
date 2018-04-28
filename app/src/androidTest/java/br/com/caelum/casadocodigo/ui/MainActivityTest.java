@@ -1,4 +1,4 @@
-package br.com.caelum.casadocodigo.activity;
+package br.com.caelum.casadocodigo.ui;
 
 
 import android.support.test.rule.ActivityTestRule;

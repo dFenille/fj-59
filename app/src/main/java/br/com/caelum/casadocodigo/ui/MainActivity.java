@@ -1,4 +1,4 @@
-package br.com.caelum.casadocodigo.activity;
+package br.com.caelum.casadocodigo.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -92,6 +92,6 @@ public class MainActivity extends AppCompatActivity implements LivrosDelegate {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void recebeNotificacao(NotificationEvent event){
-        Toast.makeText(this, event.getMessage().getNotification().toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, event.getMessage().toString(), Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,5 +1,7 @@
 package br.com.caelum.casadocodigo.event;
 
+import android.app.Notification;
+
 import com.google.firebase.messaging.RemoteMessage;
 
 import br.com.caelum.casadocodigo.modelo.Livros;
@@ -9,13 +11,13 @@ import br.com.caelum.casadocodigo.modelo.Livros;
  */
 public class NotificationEvent {
 
-    final RemoteMessage message;
+    final RemoteMessage.Notification message;
 
-    public RemoteMessage getMessage() {
+    public RemoteMessage.Notification getMessage() {
         return message;
     }
 
-    public NotificationEvent(RemoteMessage remoteMessage) {
-        this.message = remoteMessage;
+    public NotificationEvent(RemoteMessage.Notification notification) {
+        this.message = notification;
     }
 }

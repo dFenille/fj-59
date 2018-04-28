@@ -2,8 +2,8 @@ package br.com.caelum.casadocodigo.dagger.inject;
 
 import javax.inject.Singleton;
 
-import br.com.caelum.casadocodigo.activity.CarrinhoActivity;
-import br.com.caelum.casadocodigo.activity.DetalhesLivroFragment;
+import br.com.caelum.casadocodigo.ui.CarrinhoActivity;
+import br.com.caelum.casadocodigo.ui.DetalhesLivroFragment;
 import br.com.caelum.casadocodigo.dagger.module.CasaDoCodigoModule;
 import dagger.Component;
 

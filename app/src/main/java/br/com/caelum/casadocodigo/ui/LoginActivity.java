@@ -1,4 +1,4 @@
-package br.com.caelum.casadocodigo.activity;
+package br.com.caelum.casadocodigo.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +16,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import br.com.caelum.casadocodigo.R;
+import br.com.caelum.casadocodigo.api.WebClient;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -35,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener listener;
     private boolean flagUsuarioLogado = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_logar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = campoEmail.getText().toString();
+                final String email = campoEmail.getText().toString();
                 String senha = campoSenha.getText().toString();
                 if(!email.isEmpty() && !senha.isEmpty()){
                     firebaseAuth.signInWithEmailAndPassword(email, senha)
@@ -60,6 +63,10 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (!task.isSuccessful()) {
                                         Snackbar.make(campoEmail, "Acesso nao autorizado, verifique suas informacoes",Snackbar.LENGTH_SHORT).show();
+                                    }else{
+                                        FirebaseInstanceId instance = FirebaseInstanceId.getInstance();
+                                        String token = instance.getToken();
+                                        new WebClient().sendEmail(email,token);
                                     }
                                 }
                             });
