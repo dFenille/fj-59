@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_logar = (Button) findViewById(R.id.login_logar);
         btn_novo  = (Button) findViewById(R.id.login_novo);
         firebaseAuth = FirebaseAuth.getInstance();
+//        FirebaseAuth.getInstance().signOut();
 
         btn_logar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,9 +79,8 @@ public class LoginActivity extends AppCompatActivity {
                             .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-
                                     if (!task.isSuccessful()) {
-                                        Snackbar.make(campoEmail, "Cadastro nao autorizado, verifique suas informacoes", Snackbar.LENGTH_SHORT).show();
+                                        Snackbar.make(campoEmail, "Cadastro nao efetuado, verifique suas informacoes", Snackbar.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -101,12 +101,16 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(vaiParaMim);
                     finish();
                 } else {
+                    Toast.makeText(LoginActivity.this, "TESTE", Toast.LENGTH_SHORT).show();
                     // User is signed out
                     Log.d("Deslogado", "onAuthStateChanged:signed_out");
                 }
                 // ...
             }
         };
+        firebaseAuth.addAuthStateListener(listener);
+
+
     }
 
 }

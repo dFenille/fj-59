@@ -10,11 +10,13 @@ import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import br.com.caelum.casadocodigo.delegate.LivrosDelegate;
 import br.com.caelum.casadocodigo.api.WebClient;
 import br.com.caelum.casadocodigo.R;
 import br.com.caelum.casadocodigo.event.LivroEvent;
+import br.com.caelum.casadocodigo.event.NotificationEvent;
 import br.com.caelum.casadocodigo.modelo.Livro;
 
 public class MainActivity extends AppCompatActivity implements LivrosDelegate {
@@ -86,5 +88,10 @@ public class MainActivity extends AppCompatActivity implements LivrosDelegate {
             startActivity(vaiParaCarrinho);
         }
         return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void recebeNotificacao(NotificationEvent event){
+        Toast.makeText(this, event.getMessage().getNotification().toString(), Toast.LENGTH_SHORT).show();
     }
 }
